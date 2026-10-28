@@ -1,14 +1,20 @@
 import { Request, Response } from "express";
-import { IResponse } from "../../types/index";
-import { IUser, User } from "./user.modal";
+import type { IResponse } from "../../types/index";
+import { User } from "./user.modal";
+import type { IUser } from "./user.modal";
 import bcrypt from "bcrypt";
-import jwt, { Secret } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import type { Secret } from "jsonwebtoken";
+import type { SignOptions } from "jsonwebtoken";
 
 const ACCESS_TOKEN_SECRET: Secret = process.env.ACCESS_TOKEN_SECRET as Secret;
 const REFRESH_TOKEN_SECRET: Secret = process.env.REFRESH_TOKEN_SECRET as Secret;
 
-const ACCESS_TOKEN_EXPIRES_IN = "15m";
-const REFRESH_TOKEN_EXPIRES_IN = "7d";
+const ACCESS_TOKEN_EXPIRES_IN: SignOptions["expiresIn"] =
+  (process.env.ACCESS_TOKEN_EXPIRES_IN as SignOptions["expiresIn"]) ?? "15m";
+
+const REFRESH_TOKEN_EXPIRES_IN: SignOptions["expiresIn"] =
+  (process.env.REFRESH_TOKEN_EXPIRES_IN as SignOptions["expiresIn"]) ?? "7d";
 
 // =========================
 // SIGN-UP
