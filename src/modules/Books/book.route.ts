@@ -20,6 +20,7 @@ bookRouter.put(
 );
 bookRouter.delete(
   "/delete-book/:id",
+  verifyToken,
   verifyRole(Role.CREATOR, Role.ADMIN),
   deleteBook,
 );

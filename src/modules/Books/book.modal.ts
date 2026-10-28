@@ -1,35 +1,48 @@
-import { model, Schema } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 interface IBook {
   name: string;
   author: string;
   publishYear: number;
-  description: string;
+  description?: string;
+  createdBy: mongoose.Types.ObjectId;
 }
 
-const bookSchema = new Schema<IBook>({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
+const bookSchema = new Schema<IBook>(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    author: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    publishYear: {
+      type: Number,
+      required: true,
+    },
+
+    description: {
+      type: String,
+      trim: true,
+    },
+
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
-  author: {
-    type: String,
-    required: true,
-    trim: true,
+  {
+    timestamps: true,
   },
-  publishYear: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  description: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-});
+);
 
 const Book = model<IBook>("Book", bookSchema);
 
-export { IBook, Book };
+export { Book, IBook };
