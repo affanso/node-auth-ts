@@ -1,11 +1,6 @@
 import type { Request, Response } from "express";
 import { Book } from "./book.modal";
-
-export interface IResponse {
-  success: boolean;
-  message: string;
-  data?: any;
-}
+import { IResponse } from "../../types/index";
 
 export const addBook = async (req: Request, res: Response) => {
   const { name, author, publishYear, description } = req.body;

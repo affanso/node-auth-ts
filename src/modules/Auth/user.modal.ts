@@ -1,13 +1,13 @@
 import mongoose, { model, Schema } from "mongoose";
 
 interface IUser {
-  _id?: string;
+  _id: mongoose.Types.ObjectId;
   name: string;
   email: string;
   phone: string;
   username: string;
   password: string;
-  booksAdded?: string[];
+  booksAdded?: mongoose.Types.ObjectId[];
   role: string;
 }
 

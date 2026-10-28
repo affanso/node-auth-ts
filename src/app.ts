@@ -1,6 +1,7 @@
 import express from "express";
 import type { Express, Request, Response } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import routes from "./routes/index";
 
@@ -13,6 +14,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(cookieParser());
 
 //All routes
 app.use("/api", routes);
